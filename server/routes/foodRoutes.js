@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/authMiddleware');
-const Food = require('../models/food');
+require('../models/Food'); 
 const foodController = require('../controllers/foodController');
 
 const {

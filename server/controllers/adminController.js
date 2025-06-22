@@ -1,5 +1,7 @@
 const User = require('../models/User');
-const Food = require('../models/food');
+require('../models/Food'); 
+
+
 
 // ✅ Get All Users (excluding password)
 const getAllUsers = async (req, res) => {
