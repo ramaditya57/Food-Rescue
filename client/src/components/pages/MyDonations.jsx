@@ -11,7 +11,7 @@ const MyDonations = () => {
   useEffect(() => {
     const fetchMyDonations = async () => {
       try {
-        const res = await axios.get('http://localhost:5002/api/food/my-donations', {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/food/my-donations`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

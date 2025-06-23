@@ -10,7 +10,7 @@ const AvailableDonations = () => {
     const fetchAvailable = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5002/api/food/pending', {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}api/food/pending`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,7 +29,7 @@ const AvailableDonations = () => {
     try {
       const token = localStorage.getItem('token');
 
-      await axios.patch(`http://localhost:5002/api/food/claim/${id}`, null, {
+      await axios.patch(`${process.env.REACT_APP_API_BASE_URL}/api/food/claim/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

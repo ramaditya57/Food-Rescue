@@ -11,7 +11,7 @@ const RequestPickup = () => {
   const fetchIncomingDonations = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5002/api/food/incoming", {
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/food/incoming`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

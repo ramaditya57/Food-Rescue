@@ -9,7 +9,7 @@ const RecentDonations = () => {
     const fetchDonations = async () => {
       try {
         const token = localStorage.getItem('token'); // ✅ Use token
-        const res = await axios.get('http://localhost:5002/api/food/recent', {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}api/food/recent`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

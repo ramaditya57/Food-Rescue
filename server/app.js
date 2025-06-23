@@ -14,7 +14,7 @@ connectDB();
 
 // ✅ Setup CORS
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://food-rescue-ashy.vercel.app'], // Change in production
+  origin: ['http://localhost:3000', 'https://food-rescue-global.vercel.app'], // Change in production
   credentials: true,
 }));
 

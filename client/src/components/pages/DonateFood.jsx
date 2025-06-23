@@ -26,7 +26,7 @@ const DonateFood = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const res = await fetch('http://localhost:5002/api/food/create', {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/food/create`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
