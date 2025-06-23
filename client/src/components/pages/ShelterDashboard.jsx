@@ -9,7 +9,7 @@ const ShelterDashboard = () => {
   useEffect(() => {
     const fetchIncoming = async () => {
       try {
-        const res = await api.get('/food/incoming');
+        const res = await api.get('/api/food/incoming');
         setDonations(res.data);
       } catch (err) {
         console.error(err);
@@ -21,7 +21,7 @@ const ShelterDashboard = () => {
 
   const handleAcknowledge = async (id) => {
     try {
-      await api.patch(`/food/food/${id}/acknowledge`);
+      await api.patch(`/api/food/food/${id}/acknowledge`);
       setMessage('✅ Delivery acknowledged');
       setDonations((prev) => prev.filter((d) => d._id !== id));
     } catch (err) {
@@ -31,7 +31,7 @@ const ShelterDashboard = () => {
 
   const handleFeedback = async (id, rating, notes) => {
     try {
-      await api.post(`/food/feedback/${id}`, { rating, notes });
+      await api.post(`/api/food/feedback/${id}`, { rating, notes });
       setMessage('✅ Feedback submitted');
     } catch (err) {
       setMessage(`❌ Could not submit feedback`);
