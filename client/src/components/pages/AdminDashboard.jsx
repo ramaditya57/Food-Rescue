@@ -30,8 +30,8 @@ const AdminDashboard = () => {
         const headers = { Authorization: `Bearer ${token}` };
 
         const [usersRes, donationsRes] = await Promise.all([
-          api.get('/admin/users', { headers }),
-          api.get('/admin/donations', { headers })
+          api.get('/api/admin/users', { headers }),
+          api.get('/api/admin/donations', { headers })
         ]);
 
         setUsers(usersRes.data);
@@ -48,7 +48,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const headers = { Authorization: `Bearer ${token}` };
-      await api.patch(`/admin/approve-user/${userId}`, {}, { headers });
+      await api.patch(`/api/admin/approve-user/${userId}`, {}, { headers });
       setRefresh((prev) => !prev); // Trigger refetch
     } catch (err) {
       console.error('Approval failed:', err);
