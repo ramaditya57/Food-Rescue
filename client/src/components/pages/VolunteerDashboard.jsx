@@ -14,7 +14,7 @@ const VolunteerDashboard = () => {
 
   const fetchPickups = async () => {
     try {
-      const res = await api.get('/food/volunteer-pickups');
+      const res = await api.get('/api/food/volunteer-pickups');
       const data = res.data;
       setClaimed(data.filter(d => d.status === 'claimed'));
       setInTransit(data.filter(d => d.status === 'in_transit'));
@@ -28,7 +28,7 @@ const VolunteerDashboard = () => {
 
   const handleMarkInTransit = async (id) => {
     try {
-      await api.patch(`/food/in-transit/${id}`);
+      await api.patch(`/api/food/in-transit/${id}`);
       fetchPickups();
     } catch (err) {
       alert('Failed to mark as in transit');
@@ -37,7 +37,7 @@ const VolunteerDashboard = () => {
 
   const handleMarkDelivered = async (id) => {
     try {
-      await api.patch(`/food/${id}/delivered`);
+      await api.patch(`/api/food/${id}/delivered`);
       fetchPickups();
     } catch (err) {
       alert('Failed to mark as delivered');
