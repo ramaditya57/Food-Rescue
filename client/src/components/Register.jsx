@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api"; // ✅ using centralized api instance
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/auth/register", formData);
+      const res = await axios.post("http://localhost:5002/api/auth/register", formData);
       setMessage("✅ Registered successfully! Redirecting...");
       setUser(res.data.user);
     } catch (err) {
@@ -45,7 +45,9 @@ const Register = () => {
   return (
     <div
       className="flex items-center justify-center min-h-[100vh] bg-cover bg-center"
-      style={{ backgroundImage: "url('/register.webp')" }}
+      style={{
+        backgroundImage: "url('/register.webp')", // ✅ Ensure this image fills entire background
+      }}
     >
       <div className="bg-white/90 backdrop-blur-md shadow-xl rounded-xl p-8 w-full max-w-md mx-4 my-10">
         <h2 className="text-3xl font-bold text-center text-green-800 mb-6">Register for FoodRescue</h2>
