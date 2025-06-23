@@ -14,7 +14,7 @@ const DonateMoney = () => {
     }
 
     try {
-      const { data } = await api.post('/payment/create-order', { amount });
+      const { data } = await api.post('/api/payment/create-order', { amount });
 
       const options = {
         key: razorpayKey,
