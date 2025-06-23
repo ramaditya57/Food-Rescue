@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api'; // ✅ using centralized api instance
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -15,21 +15,18 @@ const Login = () => {
     setError('');
 
     try {
-      const res = await axios.post('http://localhost:5002/api/auth/login', {
+      const res = await api.post('/auth/login', {
         email,
         password,
       });
 
       const user = res.data.user;
 
-      // ✅ Block login if not approved
       if (
         ['donor', 'volunteer', 'shelter'].includes(user.role) &&
         !user.isApproved
       ) {
-        setError(
-          '⛔ Your account is awaiting admin approval. Please try again later.'
-        );
+        setError('⛔ Your account is awaiting admin approval. Please try again later.');
         return;
       }
 
