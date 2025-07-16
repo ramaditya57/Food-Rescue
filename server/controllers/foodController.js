@@ -87,6 +87,7 @@ const claimDonation = async (req, res) => {
 
     donation.status = 'claimed';
     donation.volunteer = req.user.id;
+    donation.claimedAt = new Date(); 
     const updated = await donation.save();
 
     res.status(200).json(updated);
@@ -146,7 +147,7 @@ const markDelivered = async (req, res) => {
 
     donation.status = 'delivered';
     donation.deliveredAt = new Date();
-    
+
     // ✅ Save the volunteer who marked it delivered
     donation.volunteer = req.user._id;
 
@@ -166,7 +167,7 @@ const markDelivered = async (req, res) => {
 // @access  Private
 const getIncomingDonations = async (req, res) => {
   try {
-    const donations = await Food.find({ status: 'delivered', volunteer: { $ne: null } })
+    const donations = await Food.find({ status: 'delivered', isAcknowledged: { $ne: true } })
       .populate('user', 'name')         // ✅ Donor name
       .populate('volunteer', 'name')    // ✅ Volunteer name
       .sort({ deliveredAt: -1 });
@@ -185,7 +186,9 @@ const acknowledgeDelivery = async (req, res) => {
     const food = await Food.findById(req.params.id);
     if (!food) return res.status(404).json({ message: 'Donation not found' });
 
+    food.status = 'delivered';
     food.isAcknowledged = true;
+    food.acknowledgedBy = req.user.id;
     await food.save();
 
     res.status(200).json({ message: 'Delivery acknowledged', food });
@@ -203,7 +206,7 @@ const submitFeedback = async (req, res) => {
   try {
     console.log('Feedback submission request:', { body: req.body, params: req.params });
     const { rating, notes } = req.body;
-    
+
     if (!rating) {
       return res.status(400).json({ message: 'Rating is required' });
     }
@@ -217,16 +220,16 @@ const submitFeedback = async (req, res) => {
       rating: rating,
       notes: notes || ''
     };
-    
+
     const savedFood = await food.save();
     console.log('Feedback saved successfully:', savedFood.feedback);
 
     res.status(200).json({ message: 'Feedback submitted successfully', food: savedFood });
   } catch (error) {
     console.error('Error submitting feedback:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       message: 'Failed to submit feedback',
-      error: error.message 
+      error: error.message
     });
   }
 };

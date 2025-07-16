@@ -33,7 +33,7 @@ const Home = () => {
               Together, we've served over <span className="text-green-700 font-semibold">12,000+</span> meals so far!
             </p>
             <p className="text-gray-600 text-sm mb-3">
-              Built with ❤️ by <span className="text-green-800 font-bold">Sarthak Dubey</span> — a passionate developer
+              Built with ❤️ by <span className="text-green-800 font-bold">Ramaditya Chaudhary</span> — a passionate developer
               driven to make a real difference in society.
             </p>
             <p className="text-sm text-gray-600 italic">

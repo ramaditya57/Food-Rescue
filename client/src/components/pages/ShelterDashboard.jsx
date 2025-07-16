@@ -119,9 +119,9 @@ const ShelterDashboard = () => {
                       <select
                         name="rating"
                         className="w-full p-2 border rounded focus:ring-emerald-400"
-                        required
+                        required defaultValue=""
                       >
-                        <option value="" disabled selected>Rate the food quality</option>
+                        <option value="" disabled>Rate the food quality</option>
                         <option value="Excellent">🌟 Excellent</option>
                         <option value="Good">👍 Good</option>
                         <option value="Average">👌 Average</option>
